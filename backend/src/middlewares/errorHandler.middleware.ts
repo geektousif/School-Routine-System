@@ -1,18 +1,17 @@
 import { NextFunction, Request, Response } from 'express';
 
-export const errorHandler = (err: Error, req: Request, res: Response, next: NextFunction) => {
+import { errorResponse } from '../utils/apiResponse';
+import { AppError } from '../utils/errors';
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const errorHandler = (err: Error, req: Request, res: Response, _next: NextFunction) => {
   if (err instanceof AppError) {
-    return res.status(err.statusCode).json({
-      success: false,
-      status: 'error',
-      message: err.message,
-      data: {},
-    });
+    return res.status(err.statusCode).json(errorResponse(err.message));
   }
-  res.status(500).json({
-    success: false,
-    status: 'error',
-    message: 'Internal Server Error',
-    data: {},
-  });
+
+  // TODO if (err instanceof ZodError) {
+  // return res.status(400).json(errorResponse(err.errors[0].message));
+  // }
+
+  return res.status(500).json(errorResponse('Internal Server Error'));
 };
