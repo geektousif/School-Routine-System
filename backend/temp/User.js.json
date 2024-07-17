@@ -1,0 +1,69 @@
+{
+  "data": {
+    "_id": 2000,
+    "properties": {
+      "email": {
+        "name": "email",
+        "kind": "scalar",
+        "unique": true,
+        "getter": false,
+        "setter": false,
+        "type": "string",
+        "array": false,
+        "runtimeType": "string"
+      },
+      "password": {
+        "name": "password",
+        "kind": "scalar",
+        "hidden": true,
+        "lazy": true,
+        "getter": false,
+        "setter": false,
+        "type": "string",
+        "array": false,
+        "runtimeType": "string"
+      },
+      "role": {
+        "name": "role",
+        "kind": "scalar",
+        "enum": true,
+        "items": ["superadmin", "school"],
+        "nativeEnumName": "user_role",
+        "default": "school",
+        "type": "UserRole",
+        "array": false,
+        "runtimeType": "UserRole"
+      },
+      "school": {
+        "name": "school",
+        "kind": "1:1",
+        "cascade": ["persist"],
+        "owner": true,
+        "nullable": true,
+        "unique": true,
+        "type": "School",
+        "array": false,
+        "runtimeType": "School",
+        "optional": true
+      }
+    },
+    "primaryKeys": [],
+    "filters": {},
+    "hooks": { "beforeUpdate": ["hashPassword"], "beforeCreate": ["hashPassword"] },
+    "indexes": [],
+    "uniques": [],
+    "className": "User",
+    "path": "./dist/entities/user.entity.js",
+    "name": "User",
+    "abstract": false,
+    "internal": true,
+    "constructorParams": [],
+    "toJsonParams": [],
+    "extends": "BaseEntity",
+    "useCache": true,
+    "collection": "user"
+  },
+  "origin": "./dist/entities/user.entity.js",
+  "hash": "5462e37e97a3a577928d6ee48220bae3",
+  "version": "6.2.9"
+}
